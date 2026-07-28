@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your name</title>
+<meta name="description" content="Personal site — projects, dashboards, and things I'm building.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #F4F6F8;
+    --grid:      #DFE4EA;
+    --surface:   #FFFFFF;
+    --ink:       #12141A;
+    --muted:     #5A616E;
+    --faint:     #8E96A3;
+    --line:      #E2E6EC;
+    --line-hi:   #C8CFDA;
+    --accent:    #4C4FE0;
+    --accent-bg: #EDEDFC;
+
+    --display: "Space Grotesk", system-ui, sans-serif;
+    --body:    "IBM Plex Sans", system-ui, sans-serif;
+    --mono:    "IBM Plex Mono", ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    background-color: var(--bg);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: -1px -1px;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, transparent 20%, var(--bg) 78%);
+    pointer-events: none;
+  }
+
+  .wrap {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 96px 24px 96px;
+  }
+
+  a { color: var(--accent); }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .rise { opacity: 0; transform: translateY(10px); animation: rise .7s cubic-bezier(.2,.7,.3,1) forwards; }
+  .d1 { animation-delay: .05s; }
+  .d2 { animation-delay: .14s; }
+  .d3 { animation-delay: .23s; }
+  .d4 { animation-delay: .32s; }
+  .d5 { animation-delay: .41s; }
+
+  @keyframes rise { to { opacity: 1; transform: none; } }
+
+  /* ---------- header ---------- */
+
+  .eyebrow-top {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin: 0 0 18px;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 8px;
+    vertical-align: 1px;
+  }
+
+  .name {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: clamp(38px, 8vw, 56px);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    margin: 0 0 16px;
+  }
+
+  .tagline {
+    font-size: 18px;
+    color: var(--muted);
+    margin: 0;
+    max-width: 46ch;
+  }
+
+  /* ---------- signature sparkline divider ---------- */
+
+  .spark { display: block; width: 100%; height: 44px; margin: 36px 0 32px; overflow: visible; }
+  .spark-line { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .spark-base { stroke: var(--line-hi); stroke-width: 1; }
+  .spark-tip { fill: var(--accent); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .spark-line { stroke-dasharray: 900; stroke-dashoffset: 900; animation: draw 1.6s cubic-bezier(.3,.6,.3,1) .3s forwards; }
+    .spark-tip { opacity: 0; animation: pop .4s ease 1.7s forwards; }
+  }
+
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes pop { to { opacity: 1; } }
+
+  /* ---------- links ---------- */
+
+  .links { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .link {
+    font-family: var(--mono);
+    font-size: 13px;
+    text-decoration: none;
+    color: var(--muted);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 7px 15px;
+    transition: color .15s ease, border-color .15s ease, transform .15s ease;
+  }
+
+  .link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  /* ---------- sections ---------- */
+
+  .section { margin-top: 72px; }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--faint);
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .rule { flex: 1; height: 1px; background: var(--line-hi); }
+
+  .count { font-family: var(--mono); font-size: 12px; color: var(--faint); }
+
+  /* ---------- cards ---------- */
+
+  .card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 24px 26px;
+    margin-bottom: 12px;
+    transition: border-color .18s ease, transform .18s ease;
+  }
+
+  .card::before {
+    content: "";
+    position: absolute;
+    left: -1px; top: 22px; bottom: 22px;
+    width: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity .18s ease;
+  }
+
+  .card:hover { border-color: var(--line-hi); transform: translateY(-2px); }
+  .card:hover::before { opacity: 1; }
+
+  .card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 6px;
+  }
+
+  .card h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+
+  .status { font-family: var(--mono); font-size: 11.5px; color: var(--faint); white-space: nowrap; }
+
+  .card p { margin: 0 0 16px; color: var(--muted); font-size: 15px; }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 3px 9px;
+  }
+
+  /* ---------- empty state ---------- */
+
+  .empty {
+    background: var(--accent-bg);
+    border: 1px solid #DEDEF8;
+    border-radius: 14px;
+    padding: 28px 26px;
+  }
+
+  .empty p { margin: 0; color: var(--muted); font-size: 15px; }
+  .empty p + p { margin-top: 8px; }
+
+  /* ---------- footer ---------- */
+
+  footer {
+    margin-top: 80px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line-hi);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faint);
+  }
+
+  @media (max-width: 560px) {
+    .wrap { padding: 60px 20px 72px; }
+    .card-head { flex-direction: column; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow-top rise d1"><span class="dot"></span>Currently building</p>
+    <h1 class="name rise d2">Your name</h1>
+    <p class="tagline rise d3">One line about what you build and why.</p>
+
+    <svg class="spark" viewBox="0 0 700 44" preserveAspectRatio="none" aria-hidden="true">
+      <line class="spark-base" x1="0" y1="43" x2="700" y2="43"></line>
+      <path class="spark-line" d="M0 34 L58 30 L116 36 L174 22 L232 27 L290 14 L348 20 L406 26 L464 11 L522 17 L580 8 L638 13 L696 4"></path>
+      <circle class="spark-tip" cx="696" cy="4" r="3.5"></circle>
+    </svg>
+
+    <nav class="links rise d4">
+      <a class="link" href="#">GitHub</a>
+      <a class="link" href="#">Email</a>
+      <a class="link" href="#">Link</a>
+    </nav>
+  </header>
+
+  <section class="section rise d5">
+    <div class="section-head">
+      <p class="eyebrow">Projects</p>
+      <span class="rule"></span>
+      <span class="count">03</span>
+    </div>
+
+    <article class="card">
+      <div class="card-head">
+        <h3>Project name</h3>
+        <span class="status">Status</span>
+      </div>
+      <p>A sentence or two about what it does and why you built it.</p>
+      <div class="tags"><span class="tag">Tech</span><span class="tag">Tech</span></div>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <h3>Project name</h3>
+        <span class="status">Status</span>
+      </div>
+      <p>A sentence or two about what it does and why you built it.</p>
+      <div class="tags"><span class="tag">Tech</span><span class="tag">Tech</span></div>
+    </article>
+
+    <article class="card">
+      <div class="card-head">
+        <h3>Project name</h3>
+        <span class="status">Status</span>
+      </div>
+      <p>A sentence or two about what it does and why you built it.</p>
+      <div class="tags"><span class="tag">Tech</span><span class="tag">Tech</span></div>
+    </article>
+  </section>
+
+  <section class="section rise d5">
+    <div class="section-head">
+      <p class="eyebrow">Dashboards</p>
+      <span class="rule"></span>
+      <span class="count">00</span>
+    </div>
+    <div class="empty">
+      <p>Nothing published yet.</p>
+      <p>Grafana links land here — same card shape as above.</p>
+    </div>
+  </section>
+
+  <footer>
+    Built and broken by me.
+  </footer>
+
+</div>
+</body>
+</html>
