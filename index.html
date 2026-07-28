@@ -243,6 +243,67 @@
   .empty p { margin: 0; color: var(--muted); font-size: 15px; }
   .empty p + p { margin-top: 8px; }
 
+  /* ---------- about ---------- */
+
+  .about p {
+    font-size: 16.5px;
+    color: var(--muted);
+    margin: 0 0 14px;
+    max-width: 58ch;
+  }
+
+  .about p:last-child { margin-bottom: 0; }
+  .about strong { color: var(--ink); font-weight: 500; }
+
+  /* ---------- elsewhere tiles ---------- */
+
+  .tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .tile {
+    display: block;
+    text-decoration: none;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+    transition: border-color .18s ease, transform .18s ease;
+  }
+
+  .tile:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+  .tile-name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 5px;
+  }
+
+  .tile-arrow {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--faint);
+    transition: color .18s ease, transform .18s ease;
+  }
+
+  .tile:hover .tile-arrow { color: var(--accent); transform: translateX(3px); }
+
+  .tile-desc {
+    display: block;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
   /* ---------- footer ---------- */
 
   footer {
@@ -257,6 +318,7 @@
   @media (max-width: 560px) {
     .wrap { padding: 60px 20px 72px; }
     .card-head { flex-direction: column; gap: 4px; }
+    .tiles { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -280,6 +342,29 @@
       <a class="link" href="#">Link</a>
     </nav>
   </header>
+
+  <section class="section rise d5">
+    <div class="section-head">
+      <p class="eyebrow">About</p>
+      <span class="rule"></span>
+    </div>
+
+    <div class="about">
+      <p>Two or three sentences here — who you are and what you actually do all day.</p>
+      <p>I build small tools for things I want to measure, then wire them into dashboards. Most of it starts as a spreadsheet and escapes.</p>
+    </div>
+
+    <div class="tiles">
+      <a class="tile" href="https://ggapp.io/YOUR-PROFILE" target="_blank" rel="noopener">
+        <span class="tile-name">GG.app <span class="tile-arrow">&rarr;</span></span>
+        <span class="tile-desc">Every game I've played, rated and ranked.</span>
+      </a>
+      <a class="tile" href="https://beliapp.com/YOUR-PROFILE" target="_blank" rel="noopener">
+        <span class="tile-name">Beli <span class="tile-arrow">&rarr;</span></span>
+        <span class="tile-desc">Every restaurant I've been to, ranked.</span>
+      </a>
+    </div>
+  </section>
 
   <section class="section rise d5">
     <div class="section-head">
