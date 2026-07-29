@@ -199,6 +199,18 @@
   .card:hover { border-color: var(--line-hi); transform: translateY(-2px); }
   .card:hover::before { opacity: 1; }
 
+  a.card { display: block; text-decoration: none; color: inherit; }
+  a.card:hover { border-color: var(--accent); }
+
+  .card-arrow {
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--faint);
+    transition: color .18s ease, transform .18s ease;
+  }
+
+  a.card:hover .card-arrow { color: var(--accent); transform: translateX(3px); }
+
   .card-head {
     display: flex;
     align-items: baseline;
@@ -367,14 +379,14 @@
       <span class="count">03</span>
     </div>
 
-    <article class="card">
+    <a class="card" href="https://charb.grafana.net/public-dashboards/0e262313342844c3bc9c5470f29f911f" target="_blank" rel="noopener">
       <div class="card-head">
         <h3>Riftbound Trends</h3>
-        <span class="status">Status</span>
+        <span class="card-arrow">&rarr;</span>
       </div>
       <p>A dashboard digging into my playstyle, records, and trends as I play Riftbound.</p>
-      <div class="tags"><span class="tag">Tech</span><span class="tag">Dashboard</span><span class="tag">TCG</span></div>
-    </article>
+      <div class="tags"><span class="tag">Grafana</span><span class="tag">Dashboard</span><span class="tag">TCG</span></div>
+    </a>
 
     <article class="card">
       <div class="card-head">
